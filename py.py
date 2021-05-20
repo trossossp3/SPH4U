@@ -1,7 +1,6 @@
 from tkinter import * 
 from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
-NavigationToolbar2Tk)
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
   
 # plot function is created for 
 # plotting the graph in 
@@ -14,13 +13,13 @@ def plot():
     # the figure that will contain the plot
     fig = Figure(figsize = (5, 5), dpi = 100) 
    
-  
+    fig.clf();
     # adding the subplot
     plot1 = fig.add_subplot(111)
-    plot1.
+    
     
     # plotting the graph
-    plot1.plot([n1, 2, 3, 4], [n2, 4, 9, 16])
+    plot1.plot([n1], [n2])
  
 
   
@@ -51,11 +50,11 @@ window.title('Plotting in Tkinter')
 window.geometry("500x500")
 
 my_entry = Entry(window, width = 20)
-my_entry.insert(0,'Username')
+my_entry.insert(0,'')
 my_entry.pack(padx = 5, pady = 5)
  
 my_entry2 = Entry(window, width = 15)
-my_entry2.insert(0,'password')
+my_entry2.insert(0,'')
 my_entry2.pack(padx = 5, pady = 5)
   
 # button that displays the plot
