@@ -44,7 +44,7 @@ class Projectile{
 }
 
 function shoot(x0,y0,v,angle){
-    projectile = new Projectile(x0, y0,v,angle);
+    projectile = new Projectile(x0, y0,v,angle*(Math.PI/180));
     var dt = 0.05;
     var t =0;
     projectile.incriment(dt);
@@ -57,9 +57,41 @@ function shoot(x0,y0,v,angle){
     return (projectile.xarr, projectile.yarr);
     
 }
-
-shoot(0,0,10,45);
+function convertToNeg(arr){
+    for (var i =0;i<arr.length-1;i++){
+        arr[i] = arr[i]*-1
+    }
+    return arr;
+}
+shoot(0,0,40,70);
 console.log(projectile.xarr);
+console.log(projectile.yarr);
+
+// ctx.beginPath();
+// ctx.arc(0, 0, 5, 0, 2*Math.PI);
+// ctx.fillStyle = "red";
+// ctx.fill();
+
+// ctx.beginPath();
+// //ctx.moveTo(20, 110);
+// console.log(projectile.xarr[projectile.xarr.length-1]);
+// ctx.arc(projectile.xarr[projectile.xarr.length-1]*grid_size, projectile.yarr[projectile.yarr.length-1]*-1*grid_size, 5,0,2*Math.PI);
+// ctx.fillStyle = "red";
+// ctx.fill();
+
+// // move to the first point
+// ctx.moveTo(projectile.xarr[0],projectile.yarr[0]);
 
 
 
+projectile.yarr = convertToNeg(projectile.yarr);
+console.log(projectile.yarr);
+for (i = 1; i < projectile.xarr.length - 1; i ++)
+{
+   var xc = (projectile.xarr[i] + projectile.xarr[i + 1]) / 2;
+   var yc = (projectile.yarr[i] + projectile.yarr[i + 1]) / 2;
+   ctx.quadraticCurveTo(projectile.xarr[i]*grid_size, projectile.yarr[i]*grid_size, xc*grid_size, yc*grid_size);
+}
+// curve through the last two points
+// ctx.quadraticCurveTo(projectile.xarr[i]*grid_size, projectile.yarr[i]*grid_size, projectile.xarr[i+1]*grid_size,projectile.yarr[i+1]*grid_size);
+ctx.stroke();
