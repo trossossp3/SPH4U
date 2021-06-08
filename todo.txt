@@ -1,0 +1,8 @@
+stop ball from going to far
+flip y axis
+inputs for values
+display information
+    max height
+    max distance
+    time in air
+    s

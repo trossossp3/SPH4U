@@ -13,10 +13,14 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <canvas id="myCanvas" width="1000px" height = "800px"></canvas>
+        <canvas id="myCanvas" width="1500px" height = "800px"></canvas>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        How much do you want to inc/dec?
+        <input type="text" id="input">
+        <button id="inc" onclick="incrementDraw();">INC</button>
+        <button id="dec" onclick="deincrementDraw();">INC</button>
         <script src="grid.js"></script>
         <script src="script.js" async defer></script>
     </body>
