@@ -1,8 +1,11 @@
-stop ball from going to far
-flip y axis
+
+
 inputs for values
+make final point on x axis
 display information
     max height
     max distance
     time in air
     s
+
+alert if ball would go out of bounds

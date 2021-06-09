@@ -17,8 +17,17 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        <div id="inputs">
+            Enter inital velocity
+            <input type="text" id="initVelocity">
+            Enter inital angle
+            <input type="text" id="initAngle">
+            Enter inital height
+            <input type="text" id="initHeight">
+            <button id="initSubmit" onclick="run()">Submit</button>
+        </div>
         How much do you want to inc/dec?
-        <input type="text" id="input">
+        <input type="text" id="incInput">
         <button id="inc" onclick="incrementDraw();">INC</button>
         <button id="dec" onclick="deincrementDraw();">INC</button>
         <script src="grid.js"></script>

@@ -1,5 +1,6 @@
 const g = 9.8;
 var index = 0;
+var initFlag = true;
 const ballColour = "red";
 class Projectile {
     constructor(x0, y0, v, angle) {
@@ -47,6 +48,8 @@ class Projectile {
 
 function shoot(x0, y0, v, angle) {
     projectile = new Projectile(x0, y0, v, angle * (Math.PI / 180));
+    console.log(range(y0, v, angle * Math.PI / 180));
+    console.log(maxHeight(y0, v, angle * Math.PI / 180));
     var dt = 0.05;
     var t = 0;
     projectile.incriment(dt);
@@ -55,68 +58,107 @@ function shoot(x0, y0, v, angle) {
         projectile.incriment(dt);
         t += dt;
     }
+    projectile.yarr = convertToNeg(projectile.yarr);
+    lastPointFix(y0, v, (angle * (Math.PI / 180)));
     drawBall();
+
     return (projectile.xarr, projectile.yarr);
 
 }
+
 function convertToNeg(arr) {
-    for (var i = 0; i < arr.length - 1; i++) {
+    for (var i = 0; i < arr.length; i++) {
         arr[i] = arr[i] * -1
     }
     return arr;
 }
-shoot(0, 0, 40, 70);
-//drawGrid();
-console.log(projectile.xarr);
-console.log(projectile.yarr);
-
-
-
-function drawBall() {
-    if (index !== 0) {
+function clearScreen() {
+    if (!initFlag) {
         ctx.translate(-1 * y_axis_distance_grid_lines * grid_size, -1 * x_axis_distance_grid_lines * grid_size);
     }
 
+    initFlag = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+function drawBall() {
+    clearScreen();
     drawGrid();
     ctx.beginPath();
-    ctx.arc(projectile.xarr[index], projectile.yarr[index], 5, 0, 2 * Math.PI);
+    ctx.arc(projectile.xarr[index] * grid_size, projectile.yarr[index] * grid_size, 5, 0, 2 * Math.PI);
     ctx.fillStyle = ballColour;
     ctx.fill();
+    console.log(range());
 }
 
 
 function incrementDraw() {
 
-    console.log(getInput());
-    var num1 = getInput();
+    console.log(getInput("incInput"));
+    var num1 = getInput("incInput");
     console.log(num1);
-    if(num1 == "bad"){
+    if (num1 == "bad") {
         return;
     }
-    index += num1;
+    if (index + num1 > projectile.xarr.length - 1) {
+        index = projectile.xarr.length - 1
+    } else {
+        index += num1;
+    }
+
     drawBall();
 }
 
 function deincrementDraw() {
     console.log("2")
-    index -= 1;
-    if (index < 0) {
-        alert("can't decrement below initial");
-        index += 1
-    } else {
-        drawBall();
+    var num1 = getInput("incInput");
+    console.log(num1);
+    if (num1 == "bad") {
+        return;
     }
+    if (index - num1 < 0) {
+        index = 0
+    } else {
+        index -= num1;
+    }
+    drawBall();
 }
 
-function getInput(){
-    var input = document.getElementById("input").value;
-    if(isNaN(input)){
+function getInput(id) {
+    var input = document.getElementById(id).value;
+    if (isNaN(input)) {
         alert("enter a real number");
         return "bad";
-        
-    }else{
-       return parseInt(input);
+
+    } else {
+        return parseInt(input);
     }
-    
+
 }
+function lastPointFix(h, v, theta) {
+    projectile.xarr[projectile.xarr.length - 1] = range(h, v, theta);
+    projectile.yarr[projectile.yarr.length - 1] = 0;
+
+}
+
+function range(h, v, theta) {
+    //V * cos(theta) * [V * sin(theta) + √(V * sin(theta))² + 2 * g * h)] / g
+
+    var n1 = v * Math.cos(theta);
+    var n2 = v * Math.sin(theta);
+    var n3 = Math.sqrt(Math.pow(v*Math.sin(theta),2)+ 2 * g * h);
+    var n4 = 2 * g * h;
+    return n1 * ((n2 + n3) / g);
+
+    //return v*v *Math.sin(2*theta)/g;
+}
+
+function maxHeight(h, v, theta) {
+    return h + Math.pow(v, 2) * Math.pow(Math.sin(theta), 2) / (2 * g);
+}
+function run() {
+    //initFlag = true;
+    index = 0;
+    shoot(0, getInput("initHeight"), getInput("initAngle"), getInput("initVelocity"));
+}//drawGrid();
+// console.log(projectile.xarr);
+// console.log(projectile.yarr);

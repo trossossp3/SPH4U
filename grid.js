@@ -3,7 +3,7 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
-var grid_size = 10;
+var grid_size = 8;
 // canvas width
 var canvas_width = canvas.width;
 
@@ -16,7 +16,7 @@ var num_lines_x = Math.floor(canvas_height / grid_size);
 // no of horizontal grid lines
 var num_lines_y = Math.floor(canvas_width / grid_size);
 
-var x_axis_distance_grid_lines = num_lines_x / 2;
+var x_axis_distance_grid_lines = num_lines_x / 1.25;
 var y_axis_distance_grid_lines = 5;
 var x_axis_starting_point = { number: 1, suffix: '' };
 var y_axis_starting_point = { number: 1, suffix: '' };
