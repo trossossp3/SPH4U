@@ -47,6 +47,9 @@ class Projectile {
 }
 
 function shoot(x0, y0, v, angle) {
+    if(checkBounds(y0, v, angle * Math.PI / 180)){
+        return;
+    }
     projectile = new Projectile(x0, y0, v, angle * (Math.PI / 180));
     console.log(range(y0, v, angle * Math.PI / 180));
     console.log(maxHeight(y0, v, angle * Math.PI / 180));
@@ -157,11 +160,12 @@ function renderText(h,v,theta){
 }
 
 function checkBounds(h,v,theta){
-    var maxHeight = maxHeight(h,v,theta);
-    var range = range(h,v,theta);
+    // var maxHeight = ;
+    // var range = ;
 
-    if(maxHeight > 79*grid_size || range > 181*grid_size){
-        alert("Inpputed values result in projecile going off grid, enter different values")
+    if(maxHeight(h,v,theta) > 79|| range(h,v,theta) > 181){
+        alert("Inpputed values result in projecile going off grid, enter different values");
+        return true;
     }
 
 }
