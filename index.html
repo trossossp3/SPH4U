@@ -10,7 +10,7 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <canvas id="myCanvas" width="1500px" height = "800px"></canvas>
@@ -20,16 +20,23 @@
         <div id="inputs">
             Enter inital velocity
             <input type="text" id="initVelocity">
+            <br>
             Enter inital angle
             <input type="text" id="initAngle">
+            <br>
             Enter inital height
             <input type="text" id="initHeight">
+            <br>
             <button id="initSubmit" onclick="run()">Submit</button>
         </div>
-        How much do you want to inc/dec?
+        <br>
+        <div id="id">
+        How many time intervals to increment/decrement?
         <input type="text" id="incInput">
-        <button id="inc" onclick="incrementDraw();">INC</button>
-        <button id="dec" onclick="deincrementDraw();">INC</button>
+        <button id="inc" onclick="incrementDraw();">Increment</button>
+        <button id="dec" onclick="deincrementDraw();">Decrement</button>
+        </div>
+        <p id='info'></p>
         <script src="grid.js"></script>
         <script src="script.js" async defer></script>
     </body>

@@ -1,0 +1,20 @@
+
+#inputs{
+    color:#1A1054;
+    position: absolute;
+    left: 1550px;
+    top: 200px;
+    text-align: right;
+    /* background-color: #84719D; */
+}
+
+#info{
+    color:#1A1054;
+    position: absolute;
+    left: 1550px;
+    top: 400px;
+    text-align: left;
+}
+#id{
+    color:#1A1054;
+}

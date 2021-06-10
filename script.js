@@ -1,7 +1,7 @@
 const g = 9.8;
 var index = 0;
 var initFlag = true;
-const ballColour = "red";
+const ballColour = "#5EB669";
 class Projectile {
     constructor(x0, y0, v, angle) {
         this.x = x0;
@@ -61,7 +61,7 @@ function shoot(x0, y0, v, angle) {
     projectile.yarr = convertToNeg(projectile.yarr);
     lastPointFix(y0, v, (angle * (Math.PI / 180)));
     drawBall();
-
+    renderText(y0, v, angle * Math.PI / 180);
     return (projectile.xarr, projectile.yarr);
 
 }
@@ -125,7 +125,7 @@ function deincrementDraw() {
 
 function getInput(id) {
     var input = document.getElementById(id).value;
-    if (isNaN(input)) {
+    if (isNaN(input) || input =="") {
         alert("enter a real number");
         return "bad";
 
@@ -139,26 +139,40 @@ function lastPointFix(h, v, theta) {
     projectile.yarr[projectile.yarr.length - 1] = 0;
 
 }
-
+function flightTime(h,v,theta){
+   
+    return (v * Math.sin(theta) + Math.sqrt(Math.pow(v*Math.sin(theta),2)+ 2 * g * h)) / g;
+}
 function range(h, v, theta) {
-    //V * cos(theta) * [V * sin(theta) + √(V * sin(theta))² + 2 * g * h)] / g
-
-    var n1 = v * Math.cos(theta);
-    var n2 = v * Math.sin(theta);
-    var n3 = Math.sqrt(Math.pow(v*Math.sin(theta),2)+ 2 * g * h);
-    var n4 = 2 * g * h;
-    return n1 * ((n2 + n3) / g);
-
-    //return v*v *Math.sin(2*theta)/g;
+    //V * cos(theta) * [V * sin(theta) + √(V * sin(theta))² + 2 * g * h)] / g  
+    
+    return v*Math.cos(theta) * flightTime(h,v,theta);
 }
 
 function maxHeight(h, v, theta) {
     return h + Math.pow(v, 2) * Math.pow(Math.sin(theta), 2) / (2 * g);
 }
+function renderText(h,v,theta){
+    document.getElementById("info").innerHTML = "Max height: " + maxHeight(h,v,theta).toFixed(2) + " meters <br>" + "Range: " + range(h,v,theta).toFixed(2)+ " meters<br>" + "Time in air: " + flightTime(h,v,theta).toFixed(2)+" seconds";
+}
+
+function checkBounds(h,v,theta){
+    var maxHeight = maxHeight(h,v,theta);
+    var range = range(h,v,theta);
+
+    if(maxHeight > 79*grid_size || range > 181*grid_size){
+        alert("Inpputed values result in projecile going off grid, enter different values")
+    }
+
+}
 function run() {
     //initFlag = true;
     index = 0;
     shoot(0, getInput("initHeight"), getInput("initAngle"), getInput("initVelocity"));
-}//drawGrid();
+
+}
+drawGrid();
+initFlag= false;
+//drawGrid();
 // console.log(projectile.xarr);
 // console.log(projectile.yarr);

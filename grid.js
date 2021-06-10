@@ -9,7 +9,7 @@ var canvas_width = canvas.width;
 
 // canvas height
 var canvas_height = canvas.height;
-const gridColour = "black";
+const gridColour = "#6A8295";
 // no of vertical grid lines
 var num_lines_x = Math.floor(canvas_height / grid_size);
 
